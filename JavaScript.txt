@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<!-- Coding by Web Addicted -->
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <title>Responsive Animated Product Cards</title>
+  <link rel="stylesheet" href="Pro.js">
+  <style type="text/css">
+    /* Google Fonts Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+  
+
+.product-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-bottom: 50px;
+  max-height: 100%;
+  margin-top: 30px;
+  width:100%;
+/*   background-image: linear-gradient(150deg, #060453 50%,#4477CE 10%, #b1b1ff 10%);*/
+}
+
+.product-card {
+  position: relative;
+  max-height: 100%;
+  max-width: 280px; /* Adjust the max-width as needed */
+  width: 100%;
+  border-radius: 25px;
+  padding: 30px 10px 30px 30px;
+  background: #fff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  z-index: 3;
+  overflow: hidden;
+  margin: 15px; /* Adjust the margin as needed */
+}
+
+.logo-cart {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 20px;
+}
+
+.logo-cart .logo {
+  height: 30px; /* Set the desired height */
+  width: auto; /* Allow the logo to scale while maintaining aspect ratio */
+  object-fit: contain;
+}
+
+.logo-cart i {
+  font-size: 27px;
+  color: #707070;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.logo-cart i:hover {
+  color: #333;
+}
+
+.product-card .main-images {
+  position:relative;
+  height: 250px;
+
+}
+
+.product-card .main-images img {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+
+  left: 1px;
+  top: 10px;
+  bottom:15px;
+  right:12px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+ }
+
+.product-card .main-images img.active {
+  opacity: 1;
+}
+
+.product-card .shoe-details .shoe_name {
+
+  font-size: 24px;
+  font-weight: 500;
+  color: #161616;
+}
+
+.product-card .shoe-details p {
+  font-size: 12px;
+  font-weight: 400;
+  color: #333;
+  text-align: justify;
+}
+
+.product-card .shoe-details .stars i {
+  margin: 0 -1px;
+  color: #333;
+}
+
+.product-card .color-price .color-option {
+  display: flex;
+  align-items: center;
+}
+
+.color-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.color-price .color-option .color {
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+  margin-right: 8px;
+}
+
+.color-option .circles {
+  display: flex;
+}
+
+.color-option .circles .circle {
+  height: 18px;
+  width: 18px;
+  background: #0071C7;
+  border-radius: 50%;
+  margin: 0 4px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.color-option .circles .circle.blue.active {
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px #0071C7;
+}
+
+.color-option .circles .circle.pink {
+  background: #FA1795;
+}
+
+.color-option .circles .circle.pink.active {
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px #FA1795;
+}
+
+.color-option .circles .circle.yellow {
+  background: #F5DA00;
+}
+
+.color-option .circles .circle.yellow.active {
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px #F5DA00;
+}
+
+.color-price .price {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.color-price .price .price_num {
+  font-size: 25px;
+  font-weight: 600;
+  color: #707070;
+}
+
+.color-price .price .price_letter {
+  font-size: 10px;
+  font-weight: 600;
+  margin-top: -4px;
+  color: #707070;
+}
+
+.product-card .button {
+  position: relative;
+  height: 50px;
+  width: 100%;
+  border-radius: 25px;
+  margin-top: 30px;
+  overflow: hidden;
+}
+
+.product-card .button .button-layer {
+  position: absolute;
+  height: 100%;
+  width: 300%;
+  left: -100%;
+  background-image: linear-gradient(135deg,red 2%, gray 50%,yellow 20%, red 10%, gray 100%);
+  transition: all 0.4s ease;
+  border-radius: 25PX;
+}
+
+.product-card .button:hover .button-layer {
+  left: 0;
+}
+
+.product-card .button button {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background: none;
+  outline: none;
+  border: none;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #fff;
+}
+  </style>
+  <!-- Boxicons CDN Link -->
+  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+  <div class="product-container">
+    <!-- Product 1 -->
+    <div class="product-card">
+      <div class="logo-cart">
+        <img class="logo" src="https://logos-world.net/wp-content/uploads/2020/04/Adidas-Logo.png" alt="logo">
+        <i class='bx bx-shopping-bag'></i>
+      </div>
+      <div class="main-images">
+        <img id="blue" class="blue active" src="https://www.lifestylesports.com/on/demandware.static/-/Sites-LSS_eCommerce_Master/default/dw06ef2c72/images/11764920xlalt1.jpg" alt="blue">
+        <img id="pink" class="pink" src="https://www.lifestylesports.com/on/demandware.static/-/Sites-LSS_eCommerce_Master/default/dw875dad27/images/21580140xlalt1.jpg" alt="pink">
+        <img id="yellow" class="yellow" src="https://www.prodirectsoccer.com/ProductImages/Main/242288_Main_Thumb_0965898.jpg" alt="yellow">
+      </div>
+      <div class="shoe-details">
+        <span class="shoe_name">SHOES GAZE ZX</span>
+        <p>Sport Shoos which we feel comfortable to run and dance</p>
+        <div class="stars">
+          <i class='bx bxs-star'></i>
+          <i class='bx bxs-star'></i>
+          <i class='bx bxs-star'></i>
+          <i class='bx bx-star'></i>
+          <i class='bx bx-star'></i>
+        </div>
+      </div>
+      <div class="color-price">
+        <div class="color-option">
+          <span class="color">Colour:</span>
+          <div class="circles">
+            <span class="circle blue active" id="blue"></span>
+            <span class="circle pink" id="pink"></span>
+            <span class="circle yellow" id="yellow"></span>
+          </div>
+        </div>
+        <div class="price">
+          <span class="price_num">300Rs</span>
+          <span class="price_letter">Three Hunderded only</span>
+        </div>
+      </div>
+      <div class="button">
+        <div class="button-layer"></div>
+        <button>Add To Cart</button>
+      </div>
+    </div>
+      <!-- <div class="product-card">
+   <div class="logo-cart">
+      <img class="logo" src="http://wallpapercave.com/wp/8ZfIwgY.jpg" alt="logo">
+      <i class='bx bx-shopping-bag'></i>
+    </div>
+    <div class="main-images">
+      <img id="blue" class="blue active" src="https://www.triumph-sports.com/wp-content/uploads/2021/04/CRKJerCha08-3.jpg" alt="blue">
+      <img id="pink" class="pink" src="https://mysportsjersey.in/wp-content/uploads/2023/02/Pink-Pixel-Jersey.webp" alt="pink" >
+      <img id="yellow" class="yellow" src="https://i.pinimg.com/736x/7a/8f/80/7a8f80d41c9be97b99a2f50f7392eff7.jpg">
+    </div>
+    <div class="shoe-details">
+      <span class="shoe_name"> SPORTS JERSEY</span>
+      <p>Lorem ipsum dolor sit lorenm i amet, consectetur adipisicing elit. Eum, ea, ducimus!</p>
+      <div class="stars">
+        <i class='bx bxs-star'></i>
+        <i class='bx bxs-star'></i>
+        <i class='bx bxs-star'></i>
+        <i class='bx bxs-star'></i>
+        <i class='bx bx-star'></i>
+      </div>
+    </div>
+    <div class="color-price">
+      <div class="color-option">
+        <span class="color">Colour:</span>
+        <div class="circles">
+          <span class="circle blue active" id="blue"></span>
+          <span class="circle pink" id="pink"></span>
+          <span class="circle yellow" id="yellow"></span>
+        </div>
+      </div>
+      <div class="price">
+        <span class="price_num">$09.00</span>
+        <span class="price_letter">Nine dollars only</span>
+      </div>
+    </div>
+    <div class="button">
+      <div class="button-layer"></div>
+      <button>Add To Cart</button>
+    </div>
+    </div> -->
+
+    <!-- Product 3 -->
+     <div class="product-card">
+<div class="logo-cart">
+      <img class="logo" src="https://www.pikpng.com/pngl/m/82-825602_sg-sg-cricket-bat-logo-clipart.png" alt="logo">
+      <i class='bx bx-shopping-bag'></i>
+    </div>
+    <div class="main-images">
+      <img id="blue" class="blue active" src="https://cricketworld.co.in/wp-content/uploads/2021/03/1-5.jpg" alt="blue">
+      <img id="pink" class="pink" src="https://m.media-amazon.com/images/I/71i6rvL0SaL.jpg" alt="pink">
+      <img id="yellow" class="yellow" src="https://images-na.ssl-images-amazon.com/images/I/51Cnvnu7ERS.jpg" alt="yellow">
+    </div>
+    <div class="shoe-details">
+      <span class="shoe_name">CRICKET KIT</span>
+      <p>All are available</p>
+      <div class="stars">
+        <i class='bx bxs-star'></i>
+        <i class='bx bxs-star'></i>
+        <i class='bx bxs-star'></i>
+        <i class='bx bxs-star'></i>
+        <i class='bx bx-star'></i>
+      </div>
+    </div>
+    <div class="color-price">
+      <div class="color-option">
+        <span class="color">Colour:</span>
+        <div class="circles">
+          <span class="circle blue active" id="blue"></span>
+          <span class="circle pink" id="pink"></span>
+          <span class="circle yellow" id="yellow"></span>
+        </div>
+      </div>
+      <div class="price">
+        <span class="price_num">900.00</span>
+        <span class="price_letter">Nine Hundred rupees  only</span>
+      </div>
+    </div>
+    <div class="button">
+      <div class="button-layer"></div>
+      <button>Add To Cart</button>
+    </div>
+    </div> 
+
+    <!-- Product 4 -->
+    <!-- <div class="product-card">
+<div class="logo-cart">
+      <img class="logo" src="https://media.lozi.shop/brand_logo/c9e001b9-86c1-4988-a1b3-181dd4c93d6e.png" alt="logo">
+      <i class='bx bx-shopping-bag'></i>
+    </div>
+    <div class="main-images">
+      <img id="blue" class="blue active" src="https://cdn8.bigcommerce.com/s-2sxhiat0li/images/stencil/1280x1280/products/222/692/IVU-COL-HS_AD__86120.1462297147.jpg?c=2&imbypass=on" alt="blue">
+      <img id="pink" class="pink" src="https://tse4.mm.bing.net/th?id=OIP.Z-i0RxBRaDrfhm4bkqg0AAHaHa&pid=Api&P=0&h=180" alt="pink">
+      <img id="yellow" class="yellow" src="https://www.victeamsports.com/wp-content/uploads/2019/05/Classic-Volleyball-Ball-1.jpg" alt="yellow">
+    </div>
+    <div class="shoe-details">
+      <span class="shoe_name">VOLLEYBALL</span>
+      <p>Lorem ipsum dolor sit lorenm i amet, consectetur adipisicing elit. Eum, ea, ducimus!</p>
+      <div class="stars">
+        <i class='bx bxs-star'></i>
+        <i class='bx bxs-star'></i>
+        <i class='bx bxs-star'></i>
+        <i class='bx bxs-star'></i>
+        <i class='bx bx-star'></i>
+      </div>
+    </div>
+    <div class="color-price">
+      <div class="color-option">
+        <span class="color">Colour:</span>
+        <div class="circles">
+          <span class="circle blue active" id="blue"></span>
+          <span class="circle pink" id="pink"></span>
+          <span class="circle yellow" id="yellow"></span>
+        </div>
+      </div>
+      <div class="price">
+        <span class="price_num">$10.00</span>
+        <span class="price_letter">Ten dollars only</span>
+      </div>
+    </div>
+    <div class="button">
+      <div class="button-layer"></div>
+      <button>Add To Cart</button>
+    </div>
+    </div>
+ -->
+    <!-- Product 5 -->
+    <!-- <div class="product-card">
+     <div class="logo-cart">
+      <img class="logo" src="https://i.pinimg.com/originals/88/42/61/88426195fa7ed6e281788ced52232482.jpg" alt="logo">
+      <i class='bx bx-shopping-bag'></i>
+    </div>
+    <div class="main-images">
+      <img id="blue" class="blue active" src="https://tse2.mm.bing.net/th?id=OIP.MI6K-5gTww8vhHMEbQOUCgHaHa&pid=Api&P=0&h=180" alt="blue">
+      <img id="pink" class="pink" src="https://i.pinimg.com/originals/a8/8c/16/a88c16e97ad7bed0ef64f6e0e0711de3.jpg" alt="pink">
+      <img id="yellow" class="yellow" src="https://images-na.ssl-images-amazon.com/images/I/61NtoBjZMJL.UL1000.jpg" alt="yellow">
+    </div>
+    <div class="shoe-details">
+      <span class="shoe_name">COOLING GLASS</span>
+      <p>Lorem ipsum dolor sit lorenm i amet, consectetur adipisicing elit. Eum, ea, ducimus!</p>
+      <div class="stars">
+        <i class='bx bxs-star'></i>
+        <i class='bx bxs-star'></i>
+        <i class='bx bxs-star'></i>
+        <i class='bx bxs-star'></i>
+        <i class='bx bx-star'></i>
+      </div>
+    </div>
+    <div class="color-price">
+      <div class="color-option">
+        <span class="color">Colour:</span>
+        <div class="circles">
+          <span class="circle blue active" id="blue"></span>
+          <span class="circle pink" id="pink"></span>
+          <span class="circle yellow" id="yellow"></span>
+        </div>
+      </div>
+      <div class="price">
+        <span class="price_num">$07.00</span>
+        <span class="price_letter">Seven dollars only</span>
+      </div>
+    </div>
+    <div class="button">
+      <div class="button-layer"></div>
+      <button>Add To Cart</button>
+    </div>
+    </div>
+ -->
+    <!-- Product 6 -->
+   <!--  <div class="product-card">
+      <div class="logo-cart">
+      <img class="logo" src="https://logos-world.net/wp-content/uploads/2020/04/Adidas-Logo.png" alt="logo">
+      <i class='bx bx-shopping-bag'></i>
+    </div>
+    <div class="main-images">
+      <img id="blue" class="blue active" src="https://i.pinimg.com/736x/9b/ea/e8/9beae8dcd785037810c3a97358471400--adidas-men-baseball-caps.jpg" alt="blue">
+      <img id="pink" class="pink" src="https://i.pinimg.com/originals/21/56/ba/2156ba382aad4b0cbdab04057037eb7e.jpg" alt="pink">
+      <img id="yellow" class="yellow" src="https://thumbs.dreamstime.com/b/yellow-baseball-cap-isolated-white-background-clipping-path-148652857.jpg" alt="yellow">
+    </div>
+    <div class="shoe-details">
+      <span class="shoe_name">SPORTS CAP</span>
+      <p>Lorem ipsum dolor sit lorenm i amet, consectetur adipisicing elit. Eum, ea, ducimus!</p>
+      <div class="stars">
+        <i class='bx bxs-star'></i>
+        <i class='bx bxs-star'></i>
+        <i class='bx bxs-star'></i>
+        <i class='bx bxs-star'></i>
+        <i class='bx bx-star'></i>
+      </div>
+    </div>
+    <div class="color-price">
+      <div class="color-option">
+        <span class="color">Colour:</span>
+        <div class="circles">
+          <span class="circle blue active" id="blue"></span>
+          <span class="circle pink" id="pink"></span>
+          <span class="circle yellow" id="yellow"></span>
+        </div>
+      </div>
+      <div class="price">
+        <span class="price_num">$05.00</span>
+        <span class="price_letter">Five dollars only</span>
+      </div>
+    </div>
+    <div class="button">
+      <div class="button-layer"></div>
+      <button>Add To Cart</button>
+    </div>
+    </div> -->
+
+    <!-- Product 7 -->
+   <!--  <div class="product-card">
+     <div class="logo-cart">
+      <img class="logo" src="https://images-platform.99static.com/pWXYZ_nWmaYxfg6CgIB1qgSWNwk=/80x47:918x885/fit-in/590x590/99designs-contests-attachments/107/107601/attachment_107601901" alt="logo">
+      <i class='bx bx-shopping-bag'></i>
+    </div>
+    <div class="main-images">
+      <img id="blue" class="blue active" src="https://www.trophyboss.com/wp-content/uploads/2016/02/JR22-CT66-1.jpg" alt="blue">
+      <img id="pink" class="pink" src="https://dugokh6j2oh83.cloudfront.net/media/catalog/product/cache/1/image/500x500/9df78eab33525d08d6e5fb8d27136e95/T/G/TGN20049_2.jpg" alt="pink">
+      <img id="yellow" class="yellow" src="https://www.terrifictrophies.co.za/wp-content/uploads/2011/10/A1187.jpg" alt="yellow">
+    </div>
+    <div class="shoe-details">
+      <span class="shoe_name">SPORTS TROPHY</span>
+      <p>Lorem ipsum dolor sit lorenm i amet, consectetur adipisicing elit. Eum, ea, ducimus!</p>
+      <div class="stars">
+        <i class='bx bxs-star'></i>
+        <i class='bx bxs-star'></i>
+        <i class='bx bxs-star'></i>
+        <i class='bx bxs-star'></i>
+        <i class='bx bx-star'></i>
+      </div>
+    </div>
+    <div class="color-price">
+      <div class="color-option">
+        <span class="color">Colour:</span>
+        <div class="circles">
+          <span class="circle blue active" id="blue"></span>
+          <span class="circle pink" id="pink"></span>
+          <span class="circle yellow" id="yellow"></span>
+        </div>
+      </div>
+      <div class="price">
+        <span class="price_num">$12.00</span>
+        <span class="price_letter">Twelve dollars only</span>
+      </div>
+    </div>
+    <div class="button">
+      <div class="button-layer"></div>
+      <button>Add To Cart</button>
+    </div>
+    </div> -->
+
+    <!-- Product 8 -->
+<!--     <div class="product-card">
+     <div class="logo-cart">
+      <img class="logo" src="https://logos-world.net/wp-content/uploads/2020/04/Adidas-Logo.png" alt="logo">
+      <i class='bx bx-shopping-bag'></i>
+    </div>
+    <div class="main-images">
+      <img id="blue" class="blue active" src="https://www.sports-fitness.co.uk/media/catalog/product/cache/966ec14f8f0d050428b3eaa214ed00f7/s/p/speedo-turbodive-swimming-costume-blue.jpg" alt="blue">
+      <img id="pink" class="pink" src="https://www.arenaswimwearstore.com/wp-content/uploads/2016/03/products-morning_94_f1.jpg" alt="pink">
+      <img id="yellow" class="yellow" src="https://www.arenaswimwearstore.com/wp-content/uploads/2016/03/products-glassy-53_f2.jpg" alt="yellow">
+    </div>
+    <div class="shoe-details">
+      <span class="shoe_name">SWIMSUITS</span>
+      <p>Lorem ipsum dolor sit lorenm i amet, consectetur adipisicing elit. Eum, ea, ducimus!</p>
+      <div class="stars">
+        <i class='bx bxs-star'></i>
+        <i class='bx bxs-star'></i>
+        <i class='bx bxs-star'></i>
+        <i class='bx bxs-star'></i>
+        <i class='bx bx-star'></i>
+      </div>
+    </div>
+    <div class="color-price">
+      <div class="color-option">
+        <span class="color">Colour:</span>
+        <div class="circles">
+          <span class="circle blue active" id="blue"></span>
+          <span class="circle pink" id="pink"></span>
+          <span class="circle yellow" id="yellow"></span>
+        </div>
+      </div>
+      <div class="price">
+        <span class="price_num">$8.00</span>
+        <span class="price_letter">Eight dollars only</span>
+      </div>
+    </div>
+    <div class="button">
+      <div class="button-layer"></div>
+      <button>Add To Cart</button>
+    </div>
+    </div> -->
+
+    <!-- Other product cards go here -->
+
+  </div>
+  <script type="text/javascript">
+    // Iterate through all product containers
+    document.querySelectorAll('.product-card').forEach((productCard) => {
+      let circle = productCard.querySelector(".color-option");
+
+      circle.addEventListener("click", (e) => {
+        let target = e.target;
+        if (target.classList.contains("circle")) {
+          // Remove active class from current active circle
+          circle.querySelector(".active").classList.remove("active");
+
+          // Add active class to the clicked circle
+          target.classList.add("active");
+
+          // Remove active class from current active main image
+          productCard.querySelector(".main-images .active").classList.remove("active");
+
+          // Add active class to the corresponding main image
+          productCard.querySelector(`.main-images .${target.id}`).classList.add("active");
+        }
+      });
+    });
+  </script>
+
+  
+</body>
+</html>
