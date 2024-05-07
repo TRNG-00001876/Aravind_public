@@ -1,0 +1,367 @@
+
+FETCHUSERDATA
+
+
+function fetchUserData() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const data = [
+                { id: 1, name: "Aravind", email: "Ab@gmail.com" },
+                { id: 2, name: "pavan", email: "pb@gmail.com" }
+            ];
+            resolve(data);
+        }, 1000); 
+    });
+}
+function displayUserData(userData) {
+    userData.forEach(user => {
+        console.log("User ID:"+ user.id);
+        console.log("Name:"+ user.name);
+        console.log("Email:"+ user.email);
+    });
+}
+async function fetchAndDisplayUserData() {
+    try {
+        const userData = await fetchUserData();
+        displayUserData(userData);
+    } catch (error) {
+        console.error("Error fetching user data:", error);
+    }
+}
+fetchAndDisplayUserData();
+
+
+/*
+function main(){
+    console.log('A')
+    setTimeout(()=>{
+        console.log('B')
+    },0);
+    console.log('c');
+}
+main(); */
+
+// PROMISES
+/*
+ const add = new Promise((resolve, reject) => {
+    const reached = true;
+    if(reached)
+        {
+            resolve(300);
+        }
+        else{
+            reject();
+        }
+ })
+
+ add.then((r)=>console.log(`book the ticket ${r}`)).catch(console.error()); */
+
+
+ /* 
+set time out example in PROMISES
+
+ function fetchadata(){
+    return new Promise((resolve,reject)=>{
+        setTimeout(()=>
+        {
+            const data = {message: "Aravind is a good boy"};
+            resolve(data);
+        },2000)
+    });
+ }
+
+ fetchadata().then((result)=>console.log(result.message))
+ .catch(()=>console.log(error));*/
+
+
+
+/* fetch user data by using the await 
+
+
+
+ function fetchUserData() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const data = [
+                { id: 1, name: "Aravind", email: "Ab@gmail.com" },
+                { id: 2, name: "pavan", email: "pb@gmail.com" }
+            ];
+            resolve(data);
+        }, 1000); 
+    });
+}
+function displayUserData(userData) {
+    userData.forEach(user => {
+        console.log("User ID:"+ user.id);
+        console.log("Name:"+ user.name);
+        console.log("Email:"+ user.email);
+    });
+}
+async function fetchAndDisplayUserData() {
+    try {
+        const userData = await fetchUserData();
+        displayUserData(userData);
+    } catch (error) {
+        console.error("Error fetching user data:", error);
+    }
+}
+fetchAndDisplayUserData(); */
+
+
+/*
+
+Promises chaining
+
+function getData() {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve('Data fetched');
+        }, 1000);
+    });
+}
+
+getData()
+    .then((data) => {
+        console.log(data);
+        return 'Processed data';
+    })
+    .then((processedData) => {
+        console.log(processedData);
+    });
+*/
+
+
+
+
+
+
+/* Encapsulation 
+class Student  
+  {  
+    constructor()  
+    {  
+       var name;  
+    }  
+        getName()  
+        {  
+          return this.name;  
+        }  
+      setName(name)  
+      {  
+        this.name=name;  
+      }  
+    }  
+    var stud=new Student();  
+     stud.setName("Aravind");  
+     console.log(stud.getName());  */
+
+
+
+
+/* INHERITANCE 
+class Bike  
+{  
+  constructor()  
+  {  
+    this.company="Honda";  
+  }  
+}  
+class Vehicle extends Bike {  
+  constructor(name,price) {  
+   super();  
+    this.name=name;  
+    this.price=price;  
+  }   
+}  
+var v = new Vehicle("Shine","70000");  
+console.log(v.company+" "+v.name+" "+v.price);  */
+
+/* POLYMORPHISM 
+
+class A  
+  {  
+     display()  
+    {  
+      console.log("A is invoked");  
+    }  
+  }  
+class B extends A  
+  {  
+  }  
+var b=new B();  
+b.display();  */
+
+
+
+// copywithin  copies the given part of the  given array and with its own elements and return the modified array.
+var ar = ['aravind','adhi',['nag','rjuna'],'chintu'];
+
+// place o the posistion and in between the 1 and 2 we will pri
+
+var arr1 = ar.copyWithin(2);
+
+console.log(arr1);
+
+
+// entries() : create new iterator object of new array holding the key and value pairs for every value in the array 
+
+var itr = ar.entries()
+
+for(var i of itr)
+  {
+    console.log(i);
+  }
+
+  //flat (): it flattens a given array into newly created one dimensioanl array and it concatens the all the given elements multi dimensional elements and its specfifed path.
+
+
+  var a = [10,20,[20,30],[40,50]];
+  var arr2 = a.flat()
+
+  console.log(arr2);
+
+  // flatmap(): 
+
+
+
+
+  // fill(): fills the given array elements given specified static values
+
+  var ar = ['aravind','adhi','chintu'];
+
+  var aw = ar.fill("Arru",0,2);
+
+  console.log(aw);
+
+
+  // from() it creates a new Array carraying the excat copy of another array elements.
+
+  var Arra = Array.from("Hi ra u are the King");
+  console.log(Arra);
+
+  // filter() It returns the new element based on the provided conditions.
+  
+  
+function test(value)
+{
+  return value>30
+}
+  var ad = [1,2,69,90]
+
+  console.log(ad.filter(test))
+
+// find() It return the new only first element based on the procided condiotn.
+
+var adhi = ad.find(x=>x>69);
+
+console.log(adhi);
+
+// fundIndex It return the first index based on the provided condiotn 
+
+var amma = ad.findIndex(x=>x>69)
+
+console.log(amma);
+
+// forEach() it invokes the provided function for each element 
+
+var ad2 = [1,2,69,90];
+
+
+ad2.forEach(function(fetch)
+{
+  console.log(fetch);
+})
+
+// indexOf It used to search the postion of particular elemet in an given array
+
+
+var ad3 = ad2.indexOf(2);
+console.log(ad3);
+
+
+// Join() It combines all the array into strings and return a new String.
+
+
+
+// Map() method calls specified function for every element and returns the new array element.
+
+var ad3 = ad2.map(i=>i*i);
+
+console.log(ad3);
+
+
+// Array.of() returns a new array from differnert number of arguments.
+
+console.log(Array.of(1,2,3,4));
+
+// reduce() it reduce the given array into single value by executing reduce function
+
+// Syntax() arr.reduce(callback(accumulator, currentValue, currentIndex, array), initialValue)    
+
+var ad4 = ad2.reduce(function(i,j)
+{
+ return i+j;
+},0
+);
+
+// slice() It retrun the new array containing the copy part of the given array.
+
+var ad5 = ad2.slice(1,3);
+
+console.log(ad5);
+
+const obj = {101:"Arru",102:"Adhi"};
+
+console.log(Object.entries(obj)[1]);
+
+
+//  Object Prototype it faciliates and properties from one object to another object
+function Employee(name,age){
+  this.name = name,
+  this.age= age
+}
+Employee.prototype.fullname = function(){
+  return this.name + " "+ this.age;
+}
+
+const emp = new Employee("Aravind",21);
+
+console.log(emp.fullname());
+
+// class constructor
+
+
+class Name{
+  constructor(){
+    this.surname = "Betharasi"
+  }
+}
+class Namess extends Name{
+  constructor(id,name)
+  {
+    super();
+    this.id = id;
+    this.name = name;
+  }
+
+}
+
+
+const n= new Namess(1,"adhi");
+
+console.log(n.id+" "+n.name+" "+n.surname);
+
+// static constructor
+
+
+
+
+
+
+
+
+
+
+
+
+
